@@ -1,21 +1,43 @@
-class FWorker {
+interface Producer {
+  produce: () => void;
+}
+
+class FWorker implements Producer {
  manualProduct() {
-   console.log('manualProduct')
+   console.log('manualProduct');
+ }
+
+ produce() {
+   this.manualProduct();
  }
 }
-class
 
-class WorkShop {
-  private worker: FWorker = new FWorker();
+class Machine implements Producer{
+  autoProduct() {
+    console.log('autoProduct');
+  }
 
   produce() {
-    this.worker.manualProduct();
+    this.autoProduct();
+  }
+}
+
+class WorkShop {
+  private producer: Producer;
+
+  constructor(producer: Producer) {
+    this.producer = producer;
+  }
+
+  produce() {
+    this.producer.produce();
   }
 }
 
 class Factory {
   start() {
-    const workShop = new WorkShop();
+    const producer:Producer = new Machine();
+    const workShop = new WorkShop(producer);
     workShop.produce();
   }
 }

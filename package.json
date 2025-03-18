@@ -2,19 +2,31 @@
   "name": "study",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.html",
   "scripts": {
-    "dev": "vite"
+    "dev": "pnpm generate && vite",
+    "build": "pnpm generate && vite build",
+    "generate-html": "node ./generator/generate-html.js",
+    "generate-vite": "node ./generator/generate-vite.js",
+    "generate": "pnpm generate-html && pnpm generate-vite",
+    "create-page": "node ./create/create-page.js",
+    "remove-page": "node ./create/remove-page.js"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "three"
+  ],
+  "author": "Ezio",
   "license": "ISC",
   "dependencies": {
+    "query-string": "^9.1.0",
+    "reflect-metadata": "^0.2.2",
     "three": "^0.164.1",
     "typescript": "^5.4.5",
     "vite": "^5.2.11"
   },
   "devDependencies": {
-    "@types/three": "^0.164.0"
+    "@types/node": "^20.14.10",
+    "@types/three": "^0.164.0",
+    "sass": "^1.77.7"
   }
 }

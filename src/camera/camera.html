@@ -1,10 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
   <title>camera</title>
+  <link rel="stylesheet" href="../index.css" />
+  <style>
+    .tips {
+      position: absolute;
+      color: #fff;
+      top: 10px;
+      left: 10px;
+    }
+  </style>
 </head>
 <body>
-  <h1>camera</h1>
+  <div class="tips">
+    按O切换至 <b>正交相机</b> | 按P切换至 <b>远景相机</b>
+  </div>
+  <script type="module" src="./camera.ts"></script>
 </body>
 </html>

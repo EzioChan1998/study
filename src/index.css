@@ -1,0 +1,23 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/*.index-list {*/
+/*  list-style-type: none;*/
+/*  display: inline-flex;*/
+/*  flex-direction: column;*/
+/*  gap: 8px;*/
+/*}*/
+
+/*.index-list li {*/
+/*  box-sizing: border-box;*/
+/*  padding: 8px;*/
+/*  background: coral;*/
+/*}*/
+
+/*.index-list li a {*/
+/*  color: #333;*/
+/*  text-decoration: none;*/
+/*}*/

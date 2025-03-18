@@ -4,8 +4,18 @@
   <meta charset="UTF-8">
   <title>scroller</title>
   <link rel="stylesheet" href="../index.css" />
+  <link rel="stylesheet" href="scroller.scss" />
 </head>
 <body>
+  <div class="viewport">
+    <div class="observer-area">
+    </div>
+    <div class="scroll-bar">
+      <div class="scroll-bar-inner">
+        <div class="scroll-thumb" id="scroll-thumb"></div>
+      </div>
+    </div>
+  </div>
   <script type="module" src="./scroller.ts"></script>
 </body>
 </html>
