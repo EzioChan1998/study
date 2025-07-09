@@ -29,10 +29,12 @@ window.onload = function() {
   const thumb:HTMLDivElement = document.querySelector('.scroll-thumb') as HTMLDivElement;
   thumb.style.height = thumbHeight + 'px';
 
-  view.addEventListener('scroll', () => {
-    const scrollPercent = view.scrollTop / view.scrollHeight;
+  function scrollHandler()  {
+    const scrollPercent = view!.scrollTop / view!.scrollHeight;
     thumb.style.top = scrollBarHeight * scrollPercent + 'px';
-  });
+  }
+
+  view.addEventListener('scroll', scrollHandler);
 
   const observerArea = document.querySelector('.observer-area') as HTMLDivElement;
   observerArea.addEventListener('mouseenter', () => {
@@ -65,20 +67,44 @@ window.onload = function() {
 
   scrollBarInner.addEventListener('mousedown', (e) => {
     if(thumbStatus.isClick) {
-      thumbStatus.mouseDownY = e.offsetY;
-      thumbStatus.thumbTop = parseInt(getComputedStyle(thumb).top);
+      // 获取滚动条容器的顶部偏移量
+      const scrollBarRect = scrollBarInner.getBoundingClientRect();
+      // 计算鼠标相对于滚动条容器的 Y 坐标
+      const mouseY = e.clientY - scrollBarRect.top;
+      // 记录当前鼠标位置和滚动条位置
+      thumbStatus.mouseDownY = mouseY;
+      thumbStatus.thumbTop = parseFloat(getComputedStyle(thumb).top);
     } else {
       const scrollTop = (e.offsetY * view.scrollHeight) / scrollBarHeight;
       view.scrollTo({ top: scrollTop, behavior: "smooth" });
     }
   });
 
+
+  let scrollTimeout: number | null = null;
   scrollBarInner.addEventListener('mousemove', (e) => {
     if(thumbStatus.isClick) {
-      const diffY = e.offsetY - thumbStatus.mouseDownY;
-      const top = Math.ceil(thumbStatus.thumbTop) + diffY;
-      const scrollTop = (top * view.scrollHeight) / scrollBarHeight;
+      const scrollBarRect = scrollBarInner.getBoundingClientRect();
+      const mouseY = e.clientY - scrollBarRect.top;
+
+      const diffY = mouseY - thumbStatus.mouseDownY;
+      let newTop = thumbStatus.thumbTop + diffY;
+
+      // 限制滚动条位置在有效范围内
+      const maxTop = scrollBarHeight - thumbHeight;
+      newTop = Math.max(0, Math.min(newTop, maxTop));
+
+      thumb.style.top = newTop + 'px';
+
+      const scrollTop = (newTop * view.scrollHeight) / scrollBarHeight;
       view.scrollTo({ top: scrollTop });
+
+      if (scrollTimeout !== null) return;
+      scrollTimeout = setTimeout(() => {
+        const scrollTop = (newTop * view.scrollHeight) / scrollBarHeight;
+        view.scrollTo({ top: scrollTop });
+        scrollTimeout = null;
+      }, 16) as unknown as number; // ~60fps
     }
   });
 }

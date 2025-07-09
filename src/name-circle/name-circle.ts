@@ -1,11 +1,9 @@
 import * as THREE from 'three';
-import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
 import { SVGLoader } from 'three/examples/jsm/loaders/SVGLoader.js';
 
 const RING_HEIGHT = 40;
 
 let camera: THREE.PerspectiveCamera;
-let controls: OrbitControls;
 let scene: THREE.Scene;
 let renderer: THREE.WebGLRenderer;
 const container = document.createElement('div');
@@ -24,7 +22,7 @@ function init() {
 
   scene = new THREE.Scene();
   scene.background = new THREE.Color(0xEBAE5B);
-  scene.add(new THREE.GridHelper(400, 10, 0xff0000));
+  // scene.add(new THREE.GridHelper(400, 10, 0xff0000));
 
   renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setPixelRatio(window.devicePixelRatio);
@@ -32,9 +30,9 @@ function init() {
   renderer.setAnimationLoop( animate );
   container.appendChild(renderer.domElement);
 
-  controls = new OrbitControls(camera, renderer.domElement);
-  controls.minDistance = 300;
-  controls.maxDistance = 700;
+  // controls = new OrbitControls(camera, renderer.domElement);
+  // controls.minDistance = 300;
+  // controls.maxDistance = 700;
 
   const group = new THREE.Group();
   group.name = 'group';
@@ -73,7 +71,7 @@ function animate() {
   const group = scene.getObjectByName('group') as THREE.Mesh;
   group.rotation.y += 2 * oneDeg;
 
-  controls.update();
+  // controls.update();
   renderer.render( scene, camera );
 }
 
@@ -102,13 +100,14 @@ function initCanvas(text = '', backColor = '#000', textColor = '#fff', offset = 
   return new THREE.CanvasTexture(canvas);
 }
 
-function loadSvg(url: string, side:0|1 = THREE.FrontSide) {
+function loadSvg(url: string, side: typeof THREE.FrontSide|typeof THREE.BackSide = THREE.FrontSide) {
   const loader = new SVGLoader();
   let group = new THREE.Group();
   group.name = url;
 
 
   loader.load(url, function (data) {
+    //@ts-ignore
     const [,,height] = data.xml.attributes.viewBox.value.split(' ');
     const scale = RING_HEIGHT / Number(height);
     group.scale.set(scale, -scale, 1);

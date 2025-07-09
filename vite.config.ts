@@ -14,7 +14,11 @@ export default defineConfig({
        'own-promise': path.resolve(__dirname, './src/own-promise/own-promise.html'),
        'scroller': path.resolve(__dirname, './src/scroller/scroller.html'),
        'stripe-animate': path.resolve(__dirname, './src/stripe-animate/stripe-animate.html'),
+       'three-base': path.resolve(__dirname, './src/three-base/three-base.html'),
 
+      },
+      output: {
+        dir: 'dist',
       }
     }
   }

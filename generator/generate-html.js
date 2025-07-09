@@ -28,7 +28,7 @@ files.forEach((file) => {
   if (stats.isDirectory()) {
     const str =
       `<li>
-      <a href="./src/${file}/${file}.html">
+      <a href="./src/${file}/${file}.html" class="button-link">
         ${file}
       </a>
     </li>
@@ -37,8 +37,7 @@ files.forEach((file) => {
   }
 });
 
-const contents = template.split(/\{\{TEMPLATE}}/);
-const newContent = contents.join(addContent);
+const newContent = template.replace(/\{\{TEMPLATE}}/g, addContent);
 
 fs.writeFile('index.html', newContent, (err) => {
   if (err) {

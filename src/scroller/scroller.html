@@ -7,12 +7,13 @@
   <link rel="stylesheet" href="scroller.scss" />
 </head>
 <body>
+  <div id="back-button" onclick="window.location.href='/index.html'">←返回主页</div>
   <div class="viewport">
     <div class="observer-area">
     </div>
     <div class="scroll-bar">
       <div class="scroll-bar-inner">
-        <div class="scroll-thumb" id="scroll-thumb"></div>
+        <div class="scroll-thumb" id="scroll-thumb" draggable="false"></div>
       </div>
     </div>
   </div>

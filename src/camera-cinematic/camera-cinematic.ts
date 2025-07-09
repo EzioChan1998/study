@@ -44,6 +44,7 @@ function init() {
   rayCaster = new THREE.Raycaster();
 
   stats = new Stats();
+  stats.dom.style.left = "160px";
   document.body.appendChild(stats.dom);
 
   renderer = new THREE.WebGLRenderer( { antialias: true } );

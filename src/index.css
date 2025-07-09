@@ -4,20 +4,47 @@ html, body {
   box-sizing: border-box;
 }
 
-/*.index-list {*/
-/*  list-style-type: none;*/
-/*  display: inline-flex;*/
-/*  flex-direction: column;*/
-/*  gap: 8px;*/
-/*}*/
+#back-button {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  cursor: pointer;
+  z-index: 1000;
+  font-size: 20px;
+  color: #007BFF;
+  display: block;
+  background: rgba(255,255,255,0.7);
+  padding: 2px 4px;
+  border-radius: 6px;
+  overflow: hidden;
+  backdrop-filter: blur(12px);
+  user-select: none;
+}
 
-/*.index-list li {*/
-/*  box-sizing: border-box;*/
-/*  padding: 8px;*/
-/*  background: coral;*/
-/*}*/
+/* 基础按钮样式 */
+.button-link {
+  margin-top: 8px;
+  display: inline-block;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: #4a90e2; /* 主色 */
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
+}
 
-/*.index-list li a {*/
-/*  color: #333;*/
-/*  text-decoration: none;*/
-/*}*/
+/* 悬停效果 */
+.button-link:hover {
+  background-color: #357ABD; /* 深色变体 */
+  box-shadow: 0 6px 16px rgba(74, 144, 226, 0.4);
+  transform: translateY(-2px);
+}
+
+/* 点击效果 */
+.button-link:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(74, 144, 226, 0.2);
+}

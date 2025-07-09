@@ -31,8 +31,7 @@ files.forEach((file) => {
   }
 });
 
-const contents = template.split(/\{\{%TEMPLATE%}}/);
-const newContent = contents.join(addContent);
+const newContent = template.replace(/\{\{%TEMPLATE%}}/g, addContent);
 
 fs.writeFile('vite.config.ts', newContent, (err) => {
   if (err) {
